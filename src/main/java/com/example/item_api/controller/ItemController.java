@@ -7,15 +7,28 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/items")
 public class ItemController {
 
     private final ItemService itemService;
-//  Constructor Injection
+    //  Constructor Injection
     public ItemController(ItemService itemService) {
         this.itemService = itemService;
+    }
+
+    //  Welcome
+    @GetMapping
+    public ResponseEntity<Map<String, String>> greet() {
+        Map<String, String> info = new HashMap<>();
+        info.put("message", "Welcome to Item API use POSTMAN or other api testing tool and follow readme.md file instruction");
+        info.put("addItem", "POST /api/items");
+        info.put("getItem", "GET /api/items/{id}");
+        return ResponseEntity.ok(info);
     }
 
     // Add new item
