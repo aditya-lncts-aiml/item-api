@@ -22,15 +22,12 @@ public class ItemController {
     }
 
     //  Welcome
-    @GetMapping
-    public ResponseEntity<Map<String, String>> greet() {
-        Map<String, String> info = new HashMap<>();
-        info.put("message", "Welcome to Item API use POSTMAN or other api testing tool and follow readme.md file instruction");
-        info.put("addItem", "POST /api/items");
-        info.put("getItem", "GET /api/items/{id}");
-        return ResponseEntity.ok(info);
+    @GetMapping(produces = "text/plain")
+    public String greet() {
+        return "Welcome to Item API.\n" +
+                "POST /api/items -> Add item\n" +
+                "GET  /api/items/{id} -> Get item by ID";
     }
-
     // Add new item
     @PostMapping
     public ResponseEntity<Item> addItem(@Valid @RequestBody Item item) {
